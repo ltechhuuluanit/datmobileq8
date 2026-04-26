@@ -166,10 +166,13 @@ body {
   background-clip: text;
 }
 .hero-desc {
-  font-size: 17px;
-  color: var(--text-muted);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
   margin-bottom: 36px;
   animation: fadeInUp 0.7s ease 0.2s both;
+  text-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+  letter-spacing: 0.5px;
 }
 .hero-actions {
   display: flex; gap: 14px; flex-wrap: wrap;
