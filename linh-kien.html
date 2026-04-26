@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bảng Giá Linh Kiện - Đạt Mobile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root { --primary: #10b981; --primary-dark: #059669; } /* Green theme for wholesale */
+    .wholesale-badge { background: rgba(16, 185, 129, 0.15); border: 1px solid var(--primary); color: var(--primary); padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 700; margin-bottom: 10px; display: inline-block; }
+    .price-badge-wholesale { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 4px 12px; border-radius: 6px; font-weight: 800; font-size: 15px; }
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-weight: 600; transition: var(--transition); margin-bottom: 30px; }
+    .back-btn:hover { color: var(--primary); transform: translateX(-5px); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fab fa-apple"></i></div>
+        <div class="logo-text">
+          <span class="logo-main">ĐẠT MOBILE</span>
+          <span class="logo-sub">LINH KIỆN GIÁ SỈ</span>
+        </div>
+      </a>
+      <a href="index.html" class="btn-call"><i class="fas fa-home"></i> Về Trang Chủ</a>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay lại trang chủ</a>
+      
+      <div class="section-header">
+        <span class="wholesale-badge">DÀNH CHO THỢ & CỬA HÀNG</span>
+        <h2 class="section-title">Bảng Giá Linh Kiện iPhone</h2>
+        <p class="section-desc">Giá sỉ cực tốt cho anh em thợ. Hàng có sẵn số lượng, bao lắp máy, bảo hành lỗi là đổi.</p>
+      </div>
+
+      <!-- PIN TABS -->
+      <div class="price-tabs">
+        <button class="tab-btn active" onclick="showWholesaleTab('pin-standard')">Pin Zin US-Pro</button>
+        <button class="tab-btn" onclick="showWholesaleTab('pin-cao')">Dung Lượng Cao</button>
+        <button class="tab-btn" onclick="showWholesaleTab('pin-chan-doan')">Pin Chuẩn Đoán</button>
+      </div>
+
+      <div id="pin-standard" class="tab-content active">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead>
+              <tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr>
+            </thead>
+            <tbody id="pinStandardWholesale"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="pin-cao" class="tab-content">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead>
+              <tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr>
+            </thead>
+            <tbody id="pinCaoWholesale"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="pin-chan-doan" class="tab-content">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead>
+              <tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr>
+            </thead>
+            <tbody id="pinChanDoanWholesale"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SCREEN TABS -->
+      <div class="section-header" style="margin-top: 80px;">
+        <h2 class="section-title">Màn Hình iPhone</h2>
+        <p class="section-desc">Bảo hành cảm ứng 6 tháng. Lỗi là đổi không quanh co.</p>
+      </div>
+
+      <div class="price-tabs">
+        <button class="tab-btn active" onclick="showWholesaleTab('man-dat')">Màn Hình Đạt Mobile</button>
+        <button class="tab-btn" onclick="showWholesaleTab('man-tiger')">Màn Hình Tiger</button>
+      </div>
+
+      <div id="man-dat" class="tab-content active">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead>
+              <tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr>
+            </thead>
+            <tbody id="manDatWholesale"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="man-tiger" class="tab-content">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead>
+              <tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr>
+            </thead>
+            <tbody id="manTigerWholesale"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <p>© 2024 Đạt Mobile - Hotline: 0933.424.434 - 0826.424.434</p>
+      <p>Địa chỉ 1: 233 Liên Tỉnh 5, P.5, Q.8 | Địa chỉ 2: 1948 Phạm Thế Hiển, P.6, Q.8</p>
+    </div>
+  </footer>
+
+  <script>
+    const pinStd = [
+      ["6G", 133], ["6S", 133], ["6P", 156], ["6SP", 156],
+      ["7G", 140], ["7P", 159], ["8G", 140], ["8P", 159],
+      ["X", 190], ["XR", 174], ["XS", 206], ["XS Max", 209],
+      ["11", 188], ["11 Pro", 232], ["11 Pro Max", 250],
+      ["SE2", 165], ["12 Mini", 181], ["12 / 12 Pro", 188],
+      ["12 Pro Max", 244], ["13", 193], ["13 Pro", 244],
+      ["13 Pro Max", 275], ["14", 244], ["14 Plus", 269],
+      ["14 Pro", 310], ["14 Pro Max", 338],
+      ["15", 244], ["15 Plus", 269], ["15 Pro", 315], ["15 Pro Max", 359]
+    ];
+
+    const pinHigh = [
+      ["11 Pro Max", 300], ["12 / 12 Pro", 270], ["12 Pro Max", 320],
+      ["13 Pro Max", 350], ["14 Pro Max", 395]
+    ];
+
+    const pinDiag = [
+      ["12 / 12 Pro", 280], ["12 Pro Max", 350], ["13", 290],
+      ["13 Pro", 355], ["13 Pro Max", 380], ["14 Pro", 375], ["14 Pro Max", 395]
+    ];
+
+    const manD = [
+      ["X Incell GX", 323], ["XS Incell GX", 324], ["XS Max Incell GX", 356],
+      ["11 GX (dời IC)", 327], ["11 Pro Incell HL", 353], ["11 Pro Max", 370],
+      ["12 / 12 Pro Incell GX", 382], ["12 Pro Max Incell HL", 393],
+      ["13 Pro Incell GX", 425], ["13 Pro Max Incell HL", 509],
+      ["15 Plus Incell GX", 450], ["15 Pro Incell GX", 450],
+      ["16 Incell GX", 460], ["6S Plus HD+", 239],
+      ["7 Plus HD+", 239], ["8 Plus HD+", 239]
+    ];
+
+    const manT = [
+      ["XS Max HD+", 350], ["11 Pro HD+", 355], ["11 Pro Max HD+", 375],
+      ["12 / 12 Pro HD+", 380], ["13 HD+", 405], ["13 Pro HD+", "Liên hệ"],
+      ["13 Pro Max HD+", 430], ["14", "Liên hệ"], ["14 Pro HD+ 120Hz", 480],
+      ["14 Pro Max HD+ 120Hz", 520], ["14 Plus HD+", 470]
+    ];
+
+    function render(id, data) {
+      document.getElementById(id).innerHTML = data.map(([n, p]) => `
+        <tr>
+          <td><strong>${n}</strong></td>
+          <td><span class="price-badge-wholesale">${p}${typeof p === 'number' ? 'K' : ''}</span></td>
+          <td><a href="https://zalo.me/0933424434" target="_blank" class="contact-quick-btn"><i class="fab fa-facebook-messenger"></i> Nhắn Zalo</a></td>
+        </tr>
+      `).join('');
+    }
+
+    function showWholesaleTab(id) {
+      const target = document.getElementById(id);
+      const parent = target.parentElement;
+      parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      target.classList.add('active');
+      
+      const btnGroup = target.previousElementSibling.classList.contains('price-tabs') ? target.previousElementSibling : target.previousElementSibling.previousElementSibling;
+      btnGroup.querySelectorAll('.tab-btn').forEach(b => {
+        if (b.getAttribute('onclick').includes(id)) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+    }
+
+    render('pinStandardWholesale', pinStd);
+    render('pinCaoWholesale', pinHigh);
+    render('pinChanDoanWholesale', pinDiag);
+    render('manDatWholesale', manD);
+    render('manTigerWholesale', manT);
+  </script>
+</body>
+</html>
