@@ -1,58 +1,186 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bảng Giá Linh Kiện - Đạt Mobile</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linh Kiện Giá Sỉ - Đạt Mobile Quận 8</title>
+  <meta name="description" content="Bảng giá linh kiện iPhone sỉ: pin, màn hình, lưng zin new. Giá tốt cho anh em thợ và cửa hàng tại Quận 8 TP.HCM." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    :root { --primary: #10b981; --primary-dark: #059669; } /* Green theme for wholesale */
-    .wholesale-badge { background: rgba(16, 185, 129, 0.15); border: 1px solid var(--primary); color: var(--primary); padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 700; margin-bottom: 10px; display: inline-block; }
-    .price-badge-wholesale { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 4px 12px; border-radius: 6px; font-weight: 800; font-size: 15px; }
-    .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-weight: 600; transition: var(--transition); margin-bottom: 30px; }
-    .back-btn:hover { color: var(--primary); transform: translateX(-5px); }
+    /* Page hero banner for linh kien - dùng màu vàng như trang chủ */
+    .lk-hero {
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(245,158,11,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 20% 80%, rgba(59,130,246,0.08) 0%, transparent 60%),
+        linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      padding: 140px 0 70px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .lk-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=1920&q=80') center/cover no-repeat;
+      opacity: 0.05;
+    }
+    .lk-hero-content { position: relative; z-index: 1; }
+    .lk-hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.35);
+      color: var(--primary); padding: 6px 18px; border-radius: 50px;
+      font-size: 13px; font-weight: 600; margin-bottom: 20px; letter-spacing: 0.5px;
+    }
+    .lk-hero h1 {
+      font-size: clamp(32px, 6vw, 62px);
+      font-weight: 900; color: var(--white);
+      line-height: 1.1; margin-bottom: 16px;
+    }
+    .lk-hero h1 span {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .lk-hero p { color: var(--primary); font-size: 16px; font-weight: 600; max-width: 580px; margin: 0 auto 36px; }
+    .lk-hero-stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+    .lk-hero-stats .stat { text-align: center; }
+    .lk-hero-stats .stat-num { display: block; font-size: 24px; font-weight: 900; color: var(--primary); line-height: 1; }
+    .lk-hero-stats .stat-label { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-top: 4px; }
+
+    /* Sections */
+    .lk-section { padding: 80px 0; scroll-margin-top: 80px; }
+    .lk-section.bg-alt { background: var(--dark2); }
+    .lk-section-header { text-align: center; margin-bottom: 44px; }
+    .lk-section-tag {
+      display: inline-block;
+      background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3);
+      color: var(--primary);
+      padding: 4px 16px; border-radius: 50px; font-size: 12px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;
+    }
+
+    /* Price badges */
+    .price-badge-wholesale {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--dark); padding: 4px 14px; border-radius: 6px;
+      font-weight: 800; font-size: 15px;
+    }
+    .price-badge-laser {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white; padding: 4px 14px; border-radius: 6px;
+      font-weight: 800; font-size: 15px;
+    }
+
+    /* Quick nav pills */
+    .lk-quick-nav {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      justify-content: center; padding: 28px 0;
+      background: var(--dark2);
+      border-bottom: 1px solid rgba(245,158,11,0.12);
+    }
+    .lk-quick-nav a {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2);
+      color: var(--text-muted); padding: 9px 20px; border-radius: 50px;
+      font-size: 13px; font-weight: 600; text-decoration: none;
+      transition: var(--transition);
+    }
+    .lk-quick-nav a:hover, .lk-quick-nav a.active {
+      background: rgba(245,158,11,0.15); border-color: var(--primary);
+      color: var(--primary);
+    }
+    .lk-quick-nav a i { font-size: 13px; }
   </style>
 </head>
+
 <body>
-  <header class="header">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span><i class="fas fa-map-marker-alt"></i> 233 Liên Tỉnh 5, P.5 Q.8 &nbsp;|&nbsp; 1948 Phạm Thế Hiển, P.6 Q.8 – TP.HCM</span>
+      <span><i class="fas fa-clock"></i> 08:00 – 21:00 mỗi ngày</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
     <div class="container header-inner">
       <a href="index.html" class="logo">
         <div class="logo-icon"><i class="fab fa-apple"></i></div>
         <div class="logo-text">
           <span class="logo-main">ĐẠT MOBILE QUẬN 8</span>
-          <span class="logo-sub">LINH KIỆN GIÁ SỈ</span>
+          <span class="logo-sub">Linh Kiện Giá Sỉ</span>
         </div>
       </a>
-      <a href="index.html" class="btn-call"><i class="fas fa-home"></i> Về Trang Chủ</a>
+
+      <nav class="nav" id="nav">
+        <div class="nav-header-mobile">
+          <i class="fab fa-apple"></i> <span>ĐẠT MOBILE QUẬN 8</span>
+        </div>
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Trang Chủ</a>
+        <a href="#pin" class="nav-link"><i class="fas fa-battery-full"></i> Pin</a>
+        <a href="#man-hinh" class="nav-link"><i class="fas fa-mobile-alt"></i> Màn Hình</a>
+        <a href="#lung-iphone" class="nav-link"><i class="fas fa-layer-group"></i> Lưng iPhone</a>
+        <a href="index.html#contact" class="nav-link"><i class="fas fa-phone-alt"></i> Liên Hệ</a>
+      </nav>
+      <div class="nav-overlay" id="navOverlay"></div>
+
+      <div class="header-cta">
+        <div class="header-phones">
+          <a href="tel:0933424434" class="btn-call"><i class="fas fa-phone-alt"></i> 0933.424.434</a>
+          <a href="tel:0826424434" class="btn-call"><i class="fas fa-phone-alt"></i> 0826.424.434</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><i class="fas fa-bars"></i></button>
+      </div>
     </div>
   </header>
 
-  <section class="section">
+  <!-- PAGE HERO -->
+  <section class="lk-hero">
+    <div class="container lk-hero-content">
+      <div class="lk-hero-badge"><i class="fas fa-box-open"></i> Dành Cho Thợ & Cửa Hàng</div>
+      <h1>Bảng Giá <span>Linh Kiện</span><br>iPhone Giá Sỉ</h1>
+      <p>Hàng có sẵn số lượng – Bao lắp máy – Lỗi là đổi không quanh co</p>
+      <div class="lk-hero-stats">
+        <div class="stat"><span class="stat-num">Sỉ Tốt</span><span class="stat-label">Giá Cạnh Tranh</span></div>
+        <div class="stat"><span class="stat-num">Lỗi Đổi</span><span class="stat-label">Cam Kết Chất Lượng</span></div>
+        <div class="stat"><span class="stat-num">Sẵn Hàng</span><span class="stat-label">Số Lượng Lớn</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK NAV -->
+  <div class="lk-quick-nav container">
+    <a href="#pin"><i class="fas fa-battery-full"></i> Pin iPhone</a>
+    <a href="#man-hinh"><i class="fas fa-mobile-alt"></i> Màn Hình iPhone</a>
+    <a href="#lung-iphone"><i class="fas fa-layer-group"></i> Lưng iPhone</a>
+  </div>
+
+  <!-- ===== PIN SECTION ===== -->
+  <section class="section lk-section" id="pin">
     <div class="container">
-      <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay lại trang chủ</a>
-      
-      <div class="section-header">
-        <span class="wholesale-badge">DÀNH CHO THỢ & CỬA HÀNG</span>
-        <h2 class="section-title">Bảng Giá Linh Kiện iPhone</h2>
-        <p class="section-desc">Giá sỉ cực tốt cho anh em thợ. Hàng có sẵn số lượng, bao lắp máy, bảo hành lỗi là đổi.</p>
+      <div class="section-header lk-section-header">
+        <span class="lk-section-tag">Pin iPhone</span>
+        <h2 class="section-title">Pin iPhone Zin US-Pro</h2>
+        <p class="section-desc">Bảo hành 12 tháng – Pin chính hãng – Ngồi đợi lấy liền</p>
       </div>
 
-      <!-- PIN TABS -->
       <div class="price-tabs">
-        <button class="tab-btn active" onclick="showWholesaleTab('pin-standard')">Pin Zin US-Pro</button>
-        <button class="tab-btn" onclick="showWholesaleTab('pin-cao')">Dung Lượng Cao</button>
-        <button class="tab-btn" onclick="showWholesaleTab('pin-chan-doan')">Pin Chuẩn Đoán</button>
+        <button class="tab-btn active" onclick="showTab('pin-standard')">Pin Zin US-Pro</button>
+        <button class="tab-btn" onclick="showTab('pin-cao')">Dung Lượng Cao</button>
+        <button class="tab-btn" onclick="showTab('pin-chan-doan')">Pin Chuẩn Đoán</button>
       </div>
 
       <div id="pin-standard" class="tab-content active">
         <div class="price-table-wrap">
           <table class="price-table">
-            <thead>
-              <tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr>
-            </thead>
-            <tbody id="pinStandardWholesale"></tbody>
+            <thead><tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr></thead>
+            <tbody id="pinStdBody"></tbody>
           </table>
         </div>
       </div>
@@ -60,10 +188,8 @@
       <div id="pin-cao" class="tab-content">
         <div class="price-table-wrap">
           <table class="price-table">
-            <thead>
-              <tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr>
-            </thead>
-            <tbody id="pinCaoWholesale"></tbody>
+            <thead><tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr></thead>
+            <tbody id="pinCaoBody"></tbody>
           </table>
         </div>
       </div>
@@ -71,32 +197,33 @@
       <div id="pin-chan-doan" class="tab-content">
         <div class="price-table-wrap">
           <table class="price-table">
-            <thead>
-              <tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr>
-            </thead>
-            <tbody id="pinChanDoanWholesale"></tbody>
+            <thead><tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr></thead>
+            <tbody id="pinDiagBody"></tbody>
           </table>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- SCREEN TABS -->
-      <div class="section-header" style="margin-top: 80px;">
+  <!-- ===== MAN HINH SECTION ===== -->
+  <section class="section lk-section bg-alt" id="man-hinh">
+    <div class="container">
+      <div class="section-header lk-section-header">
+        <span class="lk-section-tag">Màn Hình iPhone</span>
         <h2 class="section-title">Màn Hình iPhone</h2>
-        <p class="section-desc">Bảo hành cảm ứng 6 tháng. Lỗi là đổi không quanh co.</p>
+        <p class="section-desc">Bảo hành cảm ứng 6 tháng – Lỗi là đổi không quanh co</p>
       </div>
 
       <div class="price-tabs">
-        <button class="tab-btn active" onclick="showWholesaleTab('man-dat')">Màn Hình Đạt Mobile</button>
-        <button class="tab-btn" onclick="showWholesaleTab('man-tiger')">Màn Hình Tiger</button>
+        <button class="tab-btn active" onclick="showTab('man-dat')">Màn Hình Đạt Mobile</button>
+        <button class="tab-btn" onclick="showTab('man-tiger')">Màn Hình Tiger</button>
       </div>
 
       <div id="man-dat" class="tab-content active">
         <div class="price-table-wrap">
           <table class="price-table">
-            <thead>
-              <tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr>
-            </thead>
-            <tbody id="manDatWholesale"></tbody>
+            <thead><tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr></thead>
+            <tbody id="manDatBody"></tbody>
           </table>
         </div>
       </div>
@@ -104,25 +231,95 @@
       <div id="man-tiger" class="tab-content">
         <div class="price-table-wrap">
           <table class="price-table">
-            <thead>
-              <tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr>
-            </thead>
-            <tbody id="manTigerWholesale"></tbody>
+            <thead><tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr></thead>
+            <tbody id="manTigerBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LUNG IPHONE SECTION ===== -->
+  <section class="section lk-section" id="lung-iphone">
+    <div class="container">
+      <div class="section-header lk-section-header">
+        <span class="lk-section-tag">Lưng iPhone</span>
+        <h2 class="section-title">Lưng iPhone Zin New Đủ Màu (Lỗ To)</h2>
+        <p class="section-desc">Hàng zin new đủ màu, bao lắp máy, lỗi đổi ngay. Dịch vụ thay lưng bằng công nghệ laser.</p>
+      </div>
+
+      <div class="price-tabs">
+        <button class="tab-btn active" onclick="showTab('lung-linh-kien')">Linh Kiện Mua Về</button>
+        <button class="tab-btn" onclick="showTab('lung-laser')">Giá Thay Bằng Laser</button>
+      </div>
+
+      <div id="lung-linh-kien" class="tab-content active">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead><tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr></thead>
+            <tbody id="lungLinhKienBody"></tbody>
           </table>
         </div>
       </div>
 
+      <div id="lung-laser" class="tab-content">
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead><tr><th>Model</th><th>Giá Thay (K)</th><th>Liên Hệ</th></tr></thead>
+            <tbody id="lungLaserBody"></tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="footer">
-    <div class="container footer-bottom">
-      <p>© 2024 ĐẠT MOBILE QUẬN 8 - Hotline: 0933.424.434 - 0826.424.434</p>
-      <p>Địa chỉ 1: 233 Liên Tỉnh 5, P.5, Q.8 | Địa chỉ 2: 1948 Phạm Thế Hiển, P.6, Q.8</p>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fab fa-apple"></i></div>
+            <div class="logo-text"><span class="logo-main">ĐẠT MOBILE</span><span class="logo-sub">Linh Kiện Giá Sỉ</span></div>
+          </a>
+          <p>Chuyên linh kiện iPhone sỉ: pin, màn hình, lưng zin new. Giá tốt cho anh em thợ và cửa hàng tại Quận 8 TP.HCM.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Danh Mục</h4>
+          <ul>
+            <li><a href="#pin">Pin iPhone Zin US-Pro</a></li>
+            <li><a href="#pin">Pin Dung Lượng Cao</a></li>
+            <li><a href="#man-hinh">Màn Hình iPhone</a></li>
+            <li><a href="#lung-iphone">Lưng iPhone Zin</a></li>
+            <li><a href="#lung-iphone">Thay Lưng Laser</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Liên Hệ</h4>
+          <p><i class="fas fa-phone-alt"></i> <a href="tel:0933424434">0933.424.434</a></p>
+          <p><i class="fas fa-phone-alt"></i> <a href="tel:0826424434">0826.424.434</a></p>
+          <p><i class="fas fa-map-marker-alt"></i> 233 Liên Tỉnh 5, P.5 Q.8</p>
+          <p><i class="fas fa-map-marker-alt"></i> 1948 Phạm Thế Hiển, P.6 Q.8</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 ĐẠT MOBILE QUẬN 8 – Designed with <i class="fas fa-heart" style="color:#ef4444"></i> for Đạt Đẹp Trai</p>
+        <div class="footer-phones-bottom">
+          <a href="tel:0933424434">0933.424.434</a> | <a href="tel:0826424434">0826.424.434</a>
+        </div>
+      </div>
     </div>
   </footer>
 
+  <!-- FLOATING BUTTONS -->
+  <div class="float-buttons">
+    <a href="tel:0933424434" class="float-btn float-call" title="Gọi ngay"><i class="fas fa-phone-alt"></i></a>
+    <a href="https://zalo.me/0933424434" target="_blank" class="float-btn float-zalo" title="Zalo"><i class="fas fa-comment-dots"></i></a>
+    <a href="#" class="float-btn float-top" title="Lên đầu trang" id="backToTop"><i class="fas fa-arrow-up"></i></a>
+  </div>
+
   <script>
+    // ===== DATA =====
     const pinStd = [
       ["6G", 133], ["6S", 133], ["6P", 156], ["6SP", 156],
       ["7G", 140], ["7P", 159], ["8G", 140], ["8P", 159],
@@ -162,34 +359,104 @@
       ["14 Pro Max HD+ 120Hz", 520], ["14 Plus HD+", 470]
     ];
 
-    function render(id, data) {
+    const lungLinhKien = [
+      ["SE 2020", 70], ["8 Plus", 66], ["X", 40], ["XS", 40], ["XS Max", 40],
+      ["8G", 58], ["XR", 68], ["11", 77], ["11 Pro", 100], ["11 Pro Max", 100],
+      ["12", 78], ["12 Mini", 80], ["12 Pro", 100], ["12 Pro Max", 100],
+      ["13", 79], ["13 Mini", 82], ["13 Pro / 13 Pro Max", 110],
+      ["14", 84], ["14 Plus", 84], ["14 Pro", 115]
+    ];
+
+    const lungLaser = [
+      ["SE 2020", 300], ["8 Plus", 300], ["X", 350], ["XS", 350], ["XS Max", 400],
+      ["8G", 300], ["XR", 350], ["11", 400], ["11 Pro", 450], ["11 Pro Max", 450],
+      ["12", 450], ["12 Mini", 450], ["12 Pro", 500], ["12 Pro Max", 550],
+      ["13", 500], ["13 Mini", 450], ["13 Pro", 550], ["13 Pro Max", 600],
+      ["14", 600], ["14 Plus", 650], ["14 Pro", 650], ["14 Pro Max", 700],
+      ["15", 600], ["15 Plus", 650], ["15 Pro", 700], ["15 Pro Max", 800],
+      ["16", 700], ["16 Pro", 750], ["16 Pro Max", 900],
+      ["17", 800], ["17 Pro", 900], ["17 Pro Max", 900]
+    ];
+
+    // ===== RENDER =====
+    function render(id, data, badgeClass = 'price-badge-wholesale') {
       document.getElementById(id).innerHTML = data.map(([n, p]) => `
         <tr>
           <td><strong>${n}</strong></td>
-          <td><span class="price-badge-wholesale">${p}${typeof p === 'number' ? 'K' : ''}</span></td>
+          <td><span class="${badgeClass}">${p}${typeof p === 'number' ? 'K' : ''}</span></td>
           <td><a href="https://zalo.me/0933424434" target="_blank" class="contact-quick-btn"><i class="fab fa-facebook-messenger"></i> Nhắn Zalo</a></td>
         </tr>
       `).join('');
     }
 
-    function showWholesaleTab(id) {
+    render('pinStdBody', pinStd);
+    render('pinCaoBody', pinHigh);
+    render('pinDiagBody', pinDiag);
+    render('manDatBody', manD);
+    render('manTigerBody', manT);
+    render('lungLinhKienBody', lungLinhKien);
+    render('lungLaserBody', lungLaser, 'price-badge-laser');
+
+    // ===== TABS =====
+    function showTab(id) {
       const target = document.getElementById(id);
-      const parent = target.parentElement;
-      parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      // Deactivate all tabs in same group
+      const section = target.closest('.lk-section, .section');
+      section.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       target.classList.add('active');
-      
-      const btnGroup = target.previousElementSibling.classList.contains('price-tabs') ? target.previousElementSibling : target.previousElementSibling.previousElementSibling;
-      btnGroup.querySelectorAll('.tab-btn').forEach(b => {
-        if (b.getAttribute('onclick').includes(id)) b.classList.add('active');
-        else b.classList.remove('active');
+      section.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('onclick').includes(`'${id}'`));
       });
     }
 
-    render('pinStandardWholesale', pinStd);
-    render('pinCaoWholesale', pinHigh);
-    render('pinChanDoanWholesale', pinDiag);
-    render('manDatWholesale', manD);
-    render('manTigerWholesale', manT);
+    // ===== HAMBURGER MENU =====
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    const navOverlay = document.getElementById('navOverlay');
+
+    function toggleNav() {
+      nav.classList.toggle('open');
+      navOverlay.classList.toggle('active');
+      hamburger.querySelector('i').className = nav.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
+    }
+    hamburger.addEventListener('click', toggleNav);
+    navOverlay.addEventListener('click', toggleNav);
+    nav.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (nav.classList.contains('open')) toggleNav();
+      });
+    });
+
+    // ===== HEADER SCROLL =====
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 50);
+      document.getElementById('backToTop').style.opacity = window.scrollY > 300 ? '1' : '0';
+    });
+
+    // ===== SMOOTH SCROLL =====
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== SCROLLSPY for quick nav =====
+    const sections = ['pin', 'man-hinh', 'lung-iphone'];
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 120) current = id;
+      });
+      document.querySelectorAll('.lk-quick-nav a').forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === `#${current}`);
+      });
+    });
   </script>
 </body>
 </html>
