@@ -86,6 +86,28 @@
         min-width: 200px;
       }
     }
+    @media (max-width: 480px) {
+      .hero-dropdown-wrap {
+        width: 100%;
+        display: block;
+      }
+      .hero-dropdown-wrap .btn-primary,
+      .hero-dropdown-wrap .btn-secondary {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        box-sizing: border-box;
+      }
+      .hero-dropdown {
+        width: 100%;
+        min-width: unset;
+        left: 0;
+        transform: none;
+      }
+      .hero-dropdown::before {
+        display: none; /* Hide top arrow pointer on mobile to look cleaner */
+      }
+    }
   </style>
 </head>
 
@@ -672,13 +694,18 @@
       }
     });
     // Close dropdown after clicking a link inside it with a short delay
-    // This fixes the mobile browser navigation cancellation bug caused by instant display:none
+    // ONLY for local/anchor links (e.g. href starts with "#").
+    // External links (e.g. linh-kien.html#...) will navigate natively without JS DOM modification
+    // which completely eliminates the mobile browser navigation cancellation bug.
     document.querySelectorAll('.hero-dropdown a').forEach(link => {
       link.addEventListener('click', function(e) {
-        const dropdown = this.closest('.hero-dropdown');
-        setTimeout(() => {
-          dropdown.classList.remove('show');
-        }, 150);
+        const href = this.getAttribute('href') || '';
+        if (href.startsWith('#')) {
+          const dropdown = this.closest('.hero-dropdown');
+          setTimeout(() => {
+            dropdown.classList.remove('show');
+          }, 150);
+        }
       });
     });
   </script>
