@@ -172,15 +172,15 @@
           <div class="hero-dropdown" id="dropdownBangGia">
             <a href="#pin-prices"><i class="fas fa-battery-full"></i> Giá Thay Pin</a>
             <a href="#screen-prices"><i class="fas fa-mobile-alt"></i> Giá Thay Màn</a>
-            <a href="linh-kien.html#lung-laser" onclick="window.location.href='linh-kien.html#lung-laser';"><i class="fas fa-fire"></i> Giá Thay Lưng</a>
+            <a href="linh-kien.html#lung-laser"><i class="fas fa-fire"></i> Giá Thay Lưng</a>
           </div>
         </div>
         <div class="hero-dropdown-wrap">
           <a href="javascript:void(0)" class="btn-secondary" id="btnLinhKien" onclick="toggleDropdown('dropdownLinhKien', event)"><i class="fas fa-box-open"></i> Linh Kiện Mua Về</a>
           <div class="hero-dropdown" id="dropdownLinhKien">
-            <a href="linh-kien.html#pin" onclick="window.location.href='linh-kien.html#pin';"><i class="fas fa-battery-full"></i> Pin</a>
-            <a href="linh-kien.html#man-hinh" onclick="window.location.href='linh-kien.html#man-hinh';"><i class="fas fa-mobile-alt"></i> Màn Hình</a>
-            <a href="lung-linh-kien.html" onclick="window.location.href='lung-linh-kien.html';"><i class="fas fa-layer-group"></i> Lưng iPhone</a>
+            <a href="linh-kien.html#pin"><i class="fas fa-battery-full"></i> Pin</a>
+            <a href="linh-kien.html#man-hinh"><i class="fas fa-mobile-alt"></i> Màn Hình</a>
+            <a href="lung-linh-kien.html"><i class="fas fa-layer-group"></i> Lưng iPhone</a>
           </div>
         </div>
         <a href="https://zalo.me/0933424434" target="_blank" class="btn-primary btn-zalo-hero"><i
@@ -680,32 +680,64 @@
 
   <script>
     // Dropdown toggle for hero buttons
+    let lastToggleTime = 0;
     function toggleDropdown(id, event) {
-      event.preventDefault();
-      event.stopPropagation();
-      // Close all other dropdowns first
+      const now = Date.now();
+      if (now - lastToggleTime < 300) {
+        if (event) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        return;
+      }
+      lastToggleTime = now;
+
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      const dropdown = document.getElementById(id);
+      const wrap = dropdown.closest('.hero-dropdown-wrap');
+      const isShow = dropdown.classList.contains('show');
+
+      // Close all other dropdowns and reset their z-index
       document.querySelectorAll('.hero-dropdown').forEach(d => {
-        if (d.id !== id) d.classList.remove('show');
+        d.classList.remove('show');
+        const parentWrap = d.closest('.hero-dropdown-wrap');
+        if (parentWrap) parentWrap.style.zIndex = '10';
       });
-      document.getElementById(id).classList.toggle('show');
+
+      if (!isShow) {
+        dropdown.classList.add('show');
+        if (wrap) wrap.style.zIndex = '1000';
+      } else {
+        dropdown.classList.remove('show');
+        if (wrap) wrap.style.zIndex = '10';
+      }
     }
+
     // Close dropdowns when clicking outside
     document.addEventListener('click', function(e) {
       if (!e.target.closest('.hero-dropdown-wrap')) {
-        document.querySelectorAll('.hero-dropdown').forEach(d => d.classList.remove('show'));
+        document.querySelectorAll('.hero-dropdown').forEach(d => {
+          d.classList.remove('show');
+          const parentWrap = d.closest('.hero-dropdown-wrap');
+          if (parentWrap) parentWrap.style.zIndex = '10';
+        });
       }
     });
+
     // Close dropdown after clicking a link inside it with a short delay
-    // ONLY for local/anchor links (e.g. href starts with "#").
-    // External links (e.g. linh-kien.html#...) will navigate natively without JS DOM modification
-    // which completely eliminates the mobile browser navigation cancellation bug.
     document.querySelectorAll('.hero-dropdown a').forEach(link => {
       link.addEventListener('click', function(e) {
         const href = this.getAttribute('href') || '';
         if (href.startsWith('#')) {
           const dropdown = this.closest('.hero-dropdown');
+          const wrap = this.closest('.hero-dropdown-wrap');
           setTimeout(() => {
             dropdown.classList.remove('show');
+            if (wrap) wrap.style.zIndex = '10';
           }, 150);
         }
       });
