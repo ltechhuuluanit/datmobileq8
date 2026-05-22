@@ -246,8 +246,8 @@
     <div class="container">
       <div class="section-header lk-section-header">
         <span class="lk-section-tag">Linh Kiện Mua Về</span>
-        <h2 class="section-title">Lưng iPhone Zin New</h2>
-        <p class="section-desc">Hàng zin new đủ màu, bao lắp máy, lỗi đổi ngay. Giá sỉ tốt cho anh em thợ và cửa hàng.</p>
+        <h2 class="section-title">Lưng iPhone - Linh Kiện Mua Về</h2>
+        <p class="section-desc">Hàng sỉ nhập về tự thay, đầy đủ màu sắc, cam kết chất lượng tốt nhất.</p>
       </div>
 
       <div class="price-table-wrap">
@@ -460,6 +460,27 @@
       document.querySelectorAll('.lk-quick-nav a').forEach(a => {
         a.classList.toggle('active', a.getAttribute('href') === `#${current}`);
       });
+    });
+
+    // ===== ONLOAD SMOOTH SCROLL FOR HASH =====
+    // Ensures mobile viewports scroll exactly to the section with proper sticky header offset on initial load
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.location.hash) {
+        setTimeout(() => {
+          const target = document.querySelector(window.location.hash);
+          if (target) {
+            const offset = 90; // Height of sticky header
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = target.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }, 300); // 300ms delay to let stylesheets and tables render completely
+      }
     });
   </script>
 </body>
