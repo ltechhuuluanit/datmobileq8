@@ -125,7 +125,8 @@
         <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Trang Chủ</a>
         <a href="#pin" class="nav-link"><i class="fas fa-battery-full"></i> Pin</a>
         <a href="#man-hinh" class="nav-link"><i class="fas fa-mobile-alt"></i> Màn Hình</a>
-        <a href="#lung-iphone" class="nav-link"><i class="fas fa-layer-group"></i> Lưng iPhone</a>
+        <a href="#lung-linh-kien" class="nav-link"><i class="fas fa-layer-group"></i> Lưng Linh Kiện</a>
+        <a href="#lung-laser" class="nav-link"><i class="fas fa-fire"></i> Thay Lưng Laser</a>
         <a href="index.html#contact" class="nav-link"><i class="fas fa-phone-alt"></i> Liên Hệ</a>
       </nav>
       <div class="nav-overlay" id="navOverlay"></div>
@@ -158,7 +159,8 @@
   <div class="lk-quick-nav container">
     <a href="#pin"><i class="fas fa-battery-full"></i> Pin iPhone</a>
     <a href="#man-hinh"><i class="fas fa-mobile-alt"></i> Màn Hình iPhone</a>
-    <a href="#lung-iphone"><i class="fas fa-layer-group"></i> Lưng iPhone</a>
+    <a href="#lung-linh-kien"><i class="fas fa-layer-group"></i> Lưng Linh Kiện</a>
+    <a href="#lung-laser"><i class="fas fa-fire"></i> Thay Lưng Laser</a>
   </div>
 
   <!-- ===== PIN SECTION ===== -->
@@ -239,36 +241,38 @@
     </div>
   </section>
 
-  <!-- ===== LUNG IPHONE SECTION ===== -->
-  <section class="section lk-section" id="lung-iphone">
+  <!-- ===== LƯNG LINH KIỆN MUA VỀ ===== -->
+  <section class="section lk-section" id="lung-linh-kien">
     <div class="container">
       <div class="section-header lk-section-header">
-        <span class="lk-section-tag">Lưng iPhone</span>
+        <span class="lk-section-tag">Linh Kiện Mua Về</span>
         <h2 class="section-title">Lưng iPhone Zin New</h2>
-        <p class="section-desc">Hàng zin new đủ màu, bao lắp máy, lỗi đổi ngay. Dịch vụ thay lưng bằng công nghệ laser.</p>
+        <p class="section-desc">Hàng zin new đủ màu, bao lắp máy, lỗi đổi ngay. Giá sỉ tốt cho anh em thợ và cửa hàng.</p>
       </div>
 
-      <div class="price-tabs">
-        <button class="tab-btn active" onclick="showTab('lung-linh-kien')">Linh Kiện Mua Về</button>
-        <button class="tab-btn" onclick="showTab('lung-laser')">Giá Thay Bằng Laser</button>
+      <div class="price-table-wrap">
+        <table class="price-table">
+          <thead><tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr></thead>
+          <tbody id="lungLinhKienBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GIÁ THAY BẰNG LASER ===== -->
+  <section class="section lk-section bg-alt" id="lung-laser">
+    <div class="container">
+      <div class="section-header lk-section-header">
+        <span class="lk-section-tag">Giá Thay Bằng Laser</span>
+        <h2 class="section-title">Thay Lưng iPhone Bằng Laser</h2>
+        <p class="section-desc">Dịch vụ thay lưng bằng công nghệ laser chuyên nghiệp. Bao đẹp, lỗi đổi ngay.</p>
       </div>
 
-      <div id="lung-linh-kien" class="tab-content active">
-        <div class="price-table-wrap">
-          <table class="price-table">
-            <thead><tr><th>Model</th><th>Giá Sỉ (K)</th><th>Liên Hệ</th></tr></thead>
-            <tbody id="lungLinhKienBody"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <div id="lung-laser" class="tab-content">
-        <div class="price-table-wrap">
-          <table class="price-table">
-            <thead><tr><th>Model</th><th>Giá Thay (K)</th><th>Liên Hệ</th></tr></thead>
-            <tbody id="lungLaserBody"></tbody>
-          </table>
-        </div>
+      <div class="price-table-wrap">
+        <table class="price-table">
+          <thead><tr><th>Model</th><th>Giá Thay (K)</th><th>Liên Hệ</th></tr></thead>
+          <tbody id="lungLaserBody"></tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -290,8 +294,8 @@
             <li><a href="#pin">Pin iPhone Zin US-Pro</a></li>
             <li><a href="#pin">Pin Dung Lượng Cao</a></li>
             <li><a href="#man-hinh">Màn Hình iPhone</a></li>
-            <li><a href="#lung-iphone">Lưng iPhone Zin</a></li>
-            <li><a href="#lung-iphone">Thay Lưng Laser</a></li>
+            <li><a href="#lung-linh-kien">Lưng iPhone Zin</a></li>
+            <li><a href="#lung-laser">Thay Lưng Laser</a></li>
           </ul>
         </div>
         <div class="footer-contact">
@@ -446,7 +450,7 @@
     });
 
     // ===== SCROLLSPY for quick nav =====
-    const sections = ['pin', 'man-hinh', 'lung-iphone'];
+    const sections = ['pin', 'man-hinh', 'lung-linh-kien', 'lung-laser'];
     window.addEventListener('scroll', () => {
       let current = '';
       sections.forEach(id => {
